@@ -6,7 +6,93 @@
   <jsp:directive.page contentType="text/html;charset=UTF-8"/>
   <f:view>
     <af:document id="d1">
-      <af:form id="f1"></af:form>
+      <af:messages id="m1"/>
+      <af:form id="f1">
+        <af:panelStretchLayout id="psl1">
+          <f:facet name="bottom"/>
+          <f:facet name="center">
+            <af:panelCollection id="pc1">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar"/>
+              <f:facet name="statusbar"/>
+              <af:table value="#{bindings.HTicketView1.collectionModel}"
+                        var="row" rows="#{bindings.HTicketView1.rangeSize}"
+                        emptyText="#{bindings.HTicketView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        fetchSize="#{bindings.HTicketView1.rangeSize}"
+                        rowBandingInterval="0"
+                        filterModel="#{bindings.HTicketView1Query.queryDescriptor}"
+                        queryListener="#{bindings.HTicketView1Query.processQuery}"
+                        filterVisible="true" varStatus="vs"
+                        selectedRowKeys="#{bindings.HTicketView1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.HTicketView1.collectionModel.makeCurrent}"
+                        rowSelection="single" id="t1" columnSelection="single"
+                        columnStretching="last" partialTriggers=":::cb1">
+                <af:column sortProperty="#{bindings.HTicketView1.hints.Id.name}"
+                           filterable="true" sortable="true"
+                           headerText="#{bindings.HTicketView1.hints.Id.label}"
+                           id="c4">
+                  <af:inputText value="#{row.bindings.Id.inputValue}"
+                                label="#{bindings.HTicketView1.hints.Id.label}"
+                                required="#{bindings.HTicketView1.hints.Id.mandatory}"
+                                columns="#{bindings.HTicketView1.hints.Id.displayWidth}"
+                                maximumLength="#{bindings.HTicketView1.hints.Id.precision}"
+                                shortDesc="#{bindings.HTicketView1.hints.Id.tooltip}"
+                                id="it1">
+                    <f:validator binding="#{row.bindings.Id.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.HTicketView1.hints.Id.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.HTicketView1.hints.Name.name}"
+                           filterable="true" sortable="true"
+                           headerText="#{bindings.HTicketView1.hints.Name.label}"
+                           id="c3">
+                  <af:inputText value="#{row.bindings.Name.inputValue}"
+                                label="#{bindings.HTicketView1.hints.Name.label}"
+                                required="#{bindings.HTicketView1.hints.Name.mandatory}"
+                                columns="#{bindings.HTicketView1.hints.Name.displayWidth}"
+                                maximumLength="#{bindings.HTicketView1.hints.Name.precision}"
+                                shortDesc="#{bindings.HTicketView1.hints.Name.tooltip}"
+                                id="it3">
+                    <f:validator binding="#{row.bindings.Name.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.HTicketView1.hints.AssignTo.name}"
+                           filterable="true" sortable="true"
+                           headerText="#{bindings.HTicketView1.hints.AssignTo.label}"
+                           id="c1">
+                  <af:inputText value="#{row.bindings.AssignTo.inputValue}"
+                                label="#{bindings.HTicketView1.hints.AssignTo.label}"
+                                required="#{bindings.HTicketView1.hints.AssignTo.mandatory}"
+                                columns="#{bindings.HTicketView1.hints.AssignTo.displayWidth}"
+                                maximumLength="#{bindings.HTicketView1.hints.AssignTo.precision}"
+                                shortDesc="#{bindings.HTicketView1.hints.AssignTo.tooltip}"
+                                id="it2">
+                    <f:validator binding="#{row.bindings.AssignTo.validator}"/>
+                  </af:inputText>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </f:facet>
+          <f:facet name="start">
+            <af:spacer width="20" height="10" id="s1"/>
+          </f:facet>
+          <f:facet name="end"/>
+          <f:facet name="top">
+            <af:panelGroupLayout layout="scroll"
+                                 xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                                 id="pgl1">
+              <af:panelGroupLayout id="pgl2">
+                <af:spacer width="800" height="30" id="s2"/>
+                <af:commandButton actionListener="#{bindings.CreateWithParams.execute}"
+                                  text="CreateWithParams"
+                                  disabled="#{!bindings.CreateWithParams.enabled}"
+                                  id="cb1"/>
+              </af:panelGroupLayout>
+            </af:panelGroupLayout>
+          </f:facet>
+        </af:panelStretchLayout>
+      </af:form>
     </af:document>
   </f:view>
 </jsp:root>

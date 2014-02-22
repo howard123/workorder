@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="WorkOrderListPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="HTicketView1" RangeSize="25"
+              DataControl="AppModuleDataControl" id="HTicketView1Iterator"/>
+    <searchRegion Binds="HTicketView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="HTicketView1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="HTicketView1Iterator" id="HTicketView1">
+      <AttrNames Name="name"/>
+      <nodeDefinition DefName="model.HTicketView" Name="HTicketView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Name"/>
+          <Item Value="AssignTo"/>
+          <Item Value="RowID"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="HTicketView1Iterator" id="Name">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="HTicketView1Iterator" id="AssignTo">
+      <AttrNames>
+        <Item Value="AssignTo"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="HTicketView1Iterator" id="CreateWithParams"
+            RequiresUpdateModel="true" Action="createWithParams">
+      <NamedData NDName="Name" NDValue="#{bindings.Name.inputValue}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="AssignTo" NDValue="#{bindings.AssignTo.inputValue}"
+                 NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>
